@@ -1,18 +1,21 @@
 /** @jsx jsx */
 import { Styled, jsx } from "theme-ui"
-import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { Header, Hero } from "./components"
 import "normalize.css"
 
-import Header from "./header"
-
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
+const Layout = ({ children, hasHero }) => {
+  const {
+    site: {
+      siteMetadata: { title, description },
+    },
+  } = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
           title
+          description
         }
       }
     }
@@ -20,7 +23,8 @@ const Layout = ({ children }) => {
 
   return (
     <Styled.root>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle={title} />
+      {hasHero ? <Hero title={title} description={description} /> : null}
       <div
         sx={{
           margin: `0 auto`,
@@ -46,4 +50,4 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+export { Layout }
