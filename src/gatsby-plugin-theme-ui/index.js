@@ -6,6 +6,12 @@ export default {
   ...base,
   styles: {
     ...base.styles,
+    a: {
+      color: "black",
+      "&:hover": {
+        color: "primary",
+      },
+    },
   },
   fontWeights: {
     medium: 600,
@@ -28,7 +34,7 @@ export default {
     primary: {
       color: "background",
       bg: "black",
-      fontWeight: medium,
+      fontWeight: 600,
       "&:hover": {
         bg: "gray",
         cursor: "pointer",

@@ -6,14 +6,7 @@ import React from "react"
 import { Button } from "@theme-ui/components"
 
 const Header = ({ siteTitle }) => (
-  <Styled.div
-    as="header"
-    sx={
-      {
-        // marginBottom: 4,
-      }
-    }
-  >
+  <Styled.div as="header">
     <div
       sx={{
         margin: `0 auto`,
@@ -25,7 +18,7 @@ const Header = ({ siteTitle }) => (
         alignItems: "center",
       }}
     >
-      <Styled.h1 sx={{ margin: 0, fontSize: 20, fontWeight: bold }}>
+      <Styled.h1 sx={{ margin: 0, fontSize: 20, fontWeight: "bold" }}>
         <Link
           to="/"
           sx={{
@@ -37,7 +30,7 @@ const Header = ({ siteTitle }) => (
             },
           }}
         >
-          {siteTitle}
+          ▼ {siteTitle}
         </Link>
       </Styled.h1>
       <Button>Cart</Button>
