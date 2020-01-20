@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
 import { Card, Text, Button } from "@theme-ui/components"
+import { Link } from "../components"
 
 const Tile = ({ title, price, image }) => {
   const data = useStaticQuery(graphql`
@@ -35,7 +36,9 @@ const Tile = ({ title, price, image }) => {
       </div>
       <Styled.h2 sx={{ mt: 4, mb: 0, fontSize: 3 }}>{title}</Styled.h2>
       <Text sx={{ fontSize: 4, mb: 2 }}>{price}</Text>
-      <Button>View</Button>
+      <Link url="/product" isButton>
+        View
+      </Link>
     </Card>
   )
 }

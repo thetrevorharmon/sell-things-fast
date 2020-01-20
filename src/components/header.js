@@ -25,12 +25,18 @@ const Header = ({ siteTitle }) => (
             color: "black",
             letterSpacing: -0.5,
             textDecoration: `none`,
+            paddingLeft: "20px",
             "&:hover": {
               textDecoration: "underline",
             },
+            "&::before": {
+              content: '"▼"',
+              position: "absolute",
+              marginLeft: "-20px",
+            },
           }}
         >
-          ▼ {siteTitle}
+          {siteTitle}
         </Link>
       </Styled.h1>
       <Button>Cart</Button>

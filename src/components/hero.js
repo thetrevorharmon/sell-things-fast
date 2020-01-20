@@ -5,9 +5,13 @@ import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
 
 const Hero = ({ title, description }) => {
-  const heroImageSrc = useStaticQuery(graphql`
+  const {
+    heroImage: {
+      childImageSharp: { fluid: heroImageSrc },
+    },
+  } = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "hero.jpg" }) {
+      heroImage: file(relativePath: { eq: "hero.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 1200) {
             ...GatsbyImageSharpFluid
@@ -76,7 +80,7 @@ const Hero = ({ title, description }) => {
       <Img
         imgStyle={{ height: "100%", width: "100%" }}
         objectFit="contain"
-        fluid={heroImageSrc.placeholderImage.childImageSharp.fluid}
+        fluid={heroImageSrc}
       />
     </div>
   )
