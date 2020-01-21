@@ -9,13 +9,27 @@ export default {
     a: {
       color: "black",
       "&:hover": {
-        color: "primary",
+        color: "gray",
+        textDecoration: "underline",
       },
+    },
+    hr: {
+      display: "block",
+      height: "1px",
+      border: 0,
+      borderTop: "1px solid",
+      borderColor: "gray",
+      opacity: "0.3",
     },
   },
   fontWeights: {
     medium: 600,
     bold: 800,
+  },
+  text: {
+    bold: {
+      fontWeight: 600,
+    },
   },
   cards: {
     primary: {
@@ -43,6 +57,16 @@ export default {
     secondary: {
       color: "background",
       bg: "secondary",
+    },
+    link: {
+      color: "black",
+      textDecoration: "underline",
+      padding: 0,
+      background: "transparent",
+      "&:hover": {
+        color: "gray",
+        cursor: "pointer",
+      },
     },
   },
 }

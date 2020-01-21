@@ -19,9 +19,6 @@ export const Link = ({ isButton, url, children, ...props }) => {
         "&:hover": {
           background: "gray",
         },
-        "&.active": {
-          background: "primary",
-        },
       }}
     >
       {children}
@@ -33,8 +30,8 @@ export const Link = ({ isButton, url, children, ...props }) => {
       to={url}
       sx={{
         color: "inherit",
-        "&.active": {
-          color: "primary",
+        "&:hover": {
+          color: "gray",
         },
       }}
     >

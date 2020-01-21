@@ -2,7 +2,7 @@
 import { Styled, jsx } from "theme-ui"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { Header, Hero } from "../components"
+import { Header, Hero, Link } from "../components"
 import "normalize.css"
 
 const Layout = ({ children, hasHero }) => {
@@ -34,11 +34,13 @@ const Layout = ({ children, hasHero }) => {
         }}
       >
         <main>{children}</main>
-        <footer sx={{ mt: 5 }}>
+        <footer sx={{ mt: 6 }}>
           <Styled.p>
             © {new Date().getFullYear()} {title}, Built with
             {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
+            <Styled.a href="https://www.gatsbyjs.org">Gatsby</Styled.a>
+            {` and `}
+            <Styled.a href="https://www.shopify.ca">Shopify</Styled.a>.
           </Styled.p>
         </footer>
       </div>

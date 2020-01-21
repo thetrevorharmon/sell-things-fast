@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import { Styled, jsx } from "theme-ui"
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import { Button } from "@theme-ui/components"
+import { Link } from "../components"
 
 const Header = ({ siteTitle }) => (
   <Styled.div as="header">
@@ -20,7 +21,7 @@ const Header = ({ siteTitle }) => (
     >
       <Styled.h1 sx={{ margin: 0, fontSize: 20, fontWeight: "bold" }}>
         <Link
-          to="/"
+          url="/"
           sx={{
             color: "black",
             letterSpacing: -0.5,
@@ -39,7 +40,9 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </Styled.h1>
-      <Button>Cart</Button>
+      <Link url="/cart" isButton>
+        Cart
+      </Link>
     </div>
   </Styled.div>
 )
