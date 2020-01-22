@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Only Down`,
@@ -11,6 +15,13 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-shopify`,
+      options: {
+        shopName: process.env.SHOP_NAME,
+        accessToken: process.env.SHOP_TOKEN,
       },
     },
     "gatsby-plugin-theme-ui",

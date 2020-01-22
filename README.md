@@ -8,6 +8,10 @@
   Gatsby's default starter forked to use https://theme-ui.com
 </h1>
 
+# Sell Things Fast
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3bdc46c0-850a-4bbd-af34-2b7f16d7f181/deploy-status)](https://app.netlify.com/sites/sell-things-fast/deploys)
+
 Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
 
 _Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._

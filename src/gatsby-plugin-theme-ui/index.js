@@ -1,7 +1,5 @@
 import { base } from "@theme-ui/presets"
-console.log({
-  base,
-})
+
 export default {
   ...base,
   styles: {
