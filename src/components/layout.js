@@ -2,7 +2,7 @@
 import { Styled, jsx } from "theme-ui"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { Header, Hero, Link } from "../components"
+import { Header, Hero } from "../components"
 import "normalize.css"
 
 const Layout = ({ children, hasHero }) => {

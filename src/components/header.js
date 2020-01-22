@@ -1,9 +1,6 @@
 /** @jsx jsx */
 import { Styled, jsx } from "theme-ui"
-// import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
-import { Button } from "@theme-ui/components"
 import { Link } from "../components"
 
 const Header = ({ siteTitle }) => (

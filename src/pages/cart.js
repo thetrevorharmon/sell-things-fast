@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import React, { useState } from "react"
+import React from "react"
 import { Styled, jsx } from "theme-ui"
 import Img from "gatsby-image"
 import { Grid, Divider, Button, Card, Text } from "@theme-ui/components"
-import { Layout, SEO, Tile, Link } from "../components"
+import { Layout, SEO, Link } from "../components"
 import { useStaticQuery, graphql } from "gatsby"
 
 const CartPage = () => {

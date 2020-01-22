@@ -2,37 +2,25 @@
 import { jsx } from "theme-ui"
 import { Grid } from "@theme-ui/components"
 import { Layout, SEO, Tile } from "../components"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
   const {
-    allFile: { nodes: placeholderImages },
-  } = useStaticQuery(graphql`
-    query placeholderImages {
-      allFile(filter: { relativeDirectory: { eq: "placeholder" } }) {
-        nodes {
-          id
-          childImageSharp {
-            fluid(maxWidth: 600) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-    }
-  `)
+    allShopifyProduct: { nodes: products },
+  } = data
 
   return (
     <Layout hasHero>
       <SEO title="Home" />
       <div sx={{ marginTop: 5 }}></div>
       <Grid gap={2} columns={3}>
-        {placeholderImages.map(placeholderImage => (
+        {products.map(product => (
           <Tile
-            key={placeholderImage.id}
-            title="Product Name"
-            price="$10"
-            image={placeholderImage.childImageSharp.fluid}
+            key={product.handle}
+            slug={product.handle}
+            title={product.title}
+            price={Number(product.priceRange.maxVariantPrice.amount)}
+            image={product.images[0].localFile.childImageSharp.fluid}
           />
         ))}
       </Grid>
@@ -41,3 +29,29 @@ const IndexPage = () => {
 }
 
 export default IndexPage
+
+export const IndexPageQuery = graphql`
+  query allProducts {
+    allShopifyProduct {
+      nodes {
+        title
+        handle
+        images {
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 600) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+        priceRange {
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
+  }
+`

@@ -1,17 +1,17 @@
 /** @jsx jsx */
-import React, { useState } from "react"
+import { useState } from "react"
 import { Styled, jsx } from "theme-ui"
 import Img from "gatsby-image"
 import { Grid, Select, Label, Button } from "@theme-ui/components"
-import { Layout, SEO, Tile, Link } from "../components"
+import { Layout, SEO } from "../components"
 import { useStaticQuery, graphql } from "gatsby"
 
 const ProductPage = () => {
   const {
     allFile: { nodes: productImages },
   } = useStaticQuery(graphql`
-    query productImages {
-      allFile(filter: { relativeDirectory: { eq: "product" } }) {
+    query placeholderProductPage {
+      allFile(filter: { relativeDirectory: { eq: "placeholder" } }) {
         nodes {
           id
           childImageSharp {
@@ -29,7 +29,7 @@ const ProductPage = () => {
   }
 
   const [image, setImage] = useState(productImages[0])
-  const colors = ["Blue", "Black", "Green", "Navy", "Gray", "Red"]
+  const colors = ["Blue", "Black", "Green"]
   const sizes = ["Small", "Medium", "Large"]
 
   const Thumbnail = ({ image }) => {
@@ -72,21 +72,14 @@ const ProductPage = () => {
   const description = (
     <div>
       <Styled.p>
-        With an improved texture and cut, this Men's Down Jacket has an
-        impeccable design.
+        This is where the product description goes. It's where you can learn
+        more about the product.
       </Styled.p>
       <Styled.ul>
-        <li>Pocketable design in a compact size for easy carrying.</li>
-        <li>
-          With a durable water-repellent coating that keeps out light rain and
-          snow.
-        </li>
-        <li>Thin, 20 denier nylon fabric for lightness and comfort.</li>
-        <li>
-          Updated this season with a finely adjusted waist for a trim
-          silhouette.
-        </li>
-        <li>Slightly narrower quilting for a sharper impression.</li>
+        <li>There's a hat</li>
+        <li>There's a pair of glasses</li>
+        <li>There's a shoe</li>
+        <li>They're all drawings, which makes them pretty hard to wear</li>
       </Styled.ul>
     </div>
   )
@@ -97,7 +90,7 @@ const ProductPage = () => {
       <Grid gap={4} columns={2}>
         {gallery}
         <div sx={{ display: "flex", flexDirection: "column" }}>
-          <Styled.h1 sx={{ mt: 0, mb: 2 }}>Men's Down Jacket</Styled.h1>
+          <Styled.h1 sx={{ mt: 0, mb: 2 }}>Product Name</Styled.h1>
           {description}
           <div>
             <Grid padding={2} columns={2}>
