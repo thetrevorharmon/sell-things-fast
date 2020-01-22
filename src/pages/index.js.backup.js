@@ -18,7 +18,7 @@ const IndexPage = ({ data }) => {
           <Tile
             key={placeholderImage.id}
             title="Product Name"
-            price="$10"
+            price={10}
             image={placeholderImage.childImageSharp.fluid}
           />
         ))}
