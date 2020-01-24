@@ -1,21 +1,68 @@
 /** @jsx jsx */
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Styled, jsx } from "theme-ui"
 import Img from "gatsby-image"
 import { Grid, Select, Label, Button } from "@theme-ui/components"
 import { Layout, SEO } from "../components"
 import { graphql } from "gatsby"
 
+function prepareVariantsWithOptions(variants) {
+  return variants.map(variant => {
+    // convert the options to a dictionary instead of an array
+    const optionsDictionary = variant.selectedOptions.reduce(
+      (options, option) => {
+        options[`${option.name.toLowerCase()}`] = option.value
+        return options
+      },
+      {}
+    )
+
+    // return an object with all of the variant properties + the options at the top level
+    return {
+      ...optionsDictionary,
+      ...variant,
+    }
+  })
+}
+
+function prepareVariantsImages(variants) {
+  const imageDictionary = variants.reduce((images, variant) => {
+    images[variant.color] = variant.image.localFile.childImageSharp.fluid
+    return images
+  }, {})
+
+  const images = Object.keys(imageDictionary).map(key => {
+    return {
+      color: key,
+      fluid: imageDictionary[key],
+    }
+  })
+
+  return images
+}
+
 const ProductPage = ({ data: { shopifyProduct: product } }) => {
-  if (product.images.length < 1) {
+  const colors = product.options.find(option => option.name === "Color").values
+  const sizes = product.options.find(option => option.name === "Size").values
+  const variants = prepareVariantsWithOptions(product.variants)
+  const images = prepareVariantsImages(variants)
+
+  if (images.length < 1) {
     throw new Error("Must have at least one product image!")
   }
 
-  const [image, setImage] = useState(product.images[0])
-  const colors = product.options.find(option => option.name === "Color").values
-  const sizes = product.options.find(option => option.name === "Size").values
+  const [variant, setVariant] = useState(variants[0])
+  const [color, setColor] = useState(variant.color)
+  const [size, setSize] = useState(variant.size)
 
-  const Thumbnail = ({ image }) => {
+  useEffect(() => {
+    const newVariant = variants.find(variant => {
+      return variant.size === size && variant.color === color
+    })
+    setVariant(newVariant)
+  }, [size, color])
+
+  const Thumbnail = ({ fluid, color }) => {
     return (
       <div
         sx={{
@@ -24,11 +71,7 @@ const ProductPage = ({ data: { shopifyProduct: product } }) => {
           padding: 1,
         }}
       >
-        <Img
-          key={image.id}
-          fluid={image.localFile.childImageSharp.fluid}
-          onClick={() => setImage(image)}
-        />
+        <Img fluid={fluid} onClick={() => setColor(color)} />
       </div>
     )
   }
@@ -42,22 +85,22 @@ const ProductPage = ({ data: { shopifyProduct: product } }) => {
           marginBottom: 2,
         }}
       >
-        <Img fluid={image.localFile.childImageSharp.fluid} />
+        <Img fluid={variant.image.localFile.childImageSharp.fluid} />
       </div>
-      {product.images.length > 1 ? (
+      {images.length > 1 ? (
         <Grid gap={2} columns={6}>
-          {product.images.map(image => (
-            <Thumbnail key={image.id} image={image} />
+          {images.map(({ fluid, color }) => (
+            <Thumbnail key={color} fluid={fluid} color={color} />
           ))}
         </Grid>
       ) : null}
     </div>
   )
 
-  const Option = ({ name, options }) => (
+  const Option = ({ name, options, onChange, defaultValue }) => (
     <div>
       <Label>{name}</Label>
-      <Select defaultValue={options[0]}>
+      <Select defaultValue={defaultValue} onChange={onChange}>
         {options.map(option => (
           <option value={option}>{option}</option>
         ))}
@@ -75,8 +118,18 @@ const ProductPage = ({ data: { shopifyProduct: product } }) => {
           <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
           <div>
             <Grid padding={2} columns={2}>
-              <Option name="Color" options={colors} />
-              <Option name="Size" options={sizes} />
+              <Option
+                name="Color"
+                options={colors}
+                defaultValue={color}
+                onChange={event => setColor(event.target.value)}
+              />
+              <Option
+                name="Size"
+                options={sizes}
+                defaultValue={size}
+                onChange={event => setSize(event.target.value)}
+              />
             </Grid>
           </div>
           <Button sx={{ margin: 2, display: "block" }}>Add to Cart</Button>
@@ -94,26 +147,22 @@ export const ProductPageQuery = graphql`
       id
       title
       descriptionHtml
-      images {
-        id
-        localFile {
-          childImageSharp {
-            fluid(maxWidth: 600) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
       options {
         name
         values
       }
       variants {
-        id
+        shopifyId
+        selectedOptions {
+          name
+          value
+        }
         image {
           localFile {
             childImageSharp {
-              id
+              fluid(maxWidth: 600) {
+                ...GatsbyImageSharpFluid
+              }
             }
           }
         }
