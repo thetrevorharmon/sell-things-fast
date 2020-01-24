@@ -39,8 +39,8 @@ export const IndexPageQuery = graphql`
         images {
           localFile {
             childImageSharp {
-              fluid(maxWidth: 600) {
-                ...GatsbyImageSharpFluid
+              fluid(maxWidth: 290) {
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
