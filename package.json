@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "sell-things-fast",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A proof-of-concept Gatsby site with a fake Shopify store called Only Down",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Trevor Harmon <thetrevorharmon@gmail.com>",
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@mdx-js/react": "^1.5.1",
@@ -45,9 +45,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/thetrevorharmon/sell-things-fast"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/thetrevorharmon/sell-things-fast/issues"
   }
 }
