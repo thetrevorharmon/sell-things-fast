@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import { Grid } from "@theme-ui/components"
-import { Layout, SEO, Tile } from "../components"
+import { Layout, SEO, Tile } from "../../components"
 import { graphql } from "gatsby"
 
 const IndexPage = ({ data }) => {

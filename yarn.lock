@@ -5629,6 +5629,11 @@ gatsby-page-utils@^0.0.37:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
+gatsby-plugin-env-variables@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-env-variables/-/gatsby-plugin-env-variables-1.0.1.tgz#89cdf43b03d46105521bb7d0f09d0d5b92ad83c8"
+  integrity sha512-TnXU+IjvM3iHcaNOa+alqP3Wk19+pmxvXwMyoPaUZIDKNwvpXRz8klsag2AwNlsqD17949/m8I80z8plZRyE1w==
+
 gatsby-plugin-manifest@^2.2.27:
   version "2.2.38"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.2.38.tgz#365d679dc815b301b38eff7893f35c62036f5e2b"
@@ -10841,6 +10846,11 @@ shell-quote@1.6.1:
     array-map "~0.0.0"
     array-reduce "~0.0.0"
     jsonify "~0.0.0"
+
+shopify-buy@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/shopify-buy/-/shopify-buy-2.9.0.tgz#72e7e86d2d89459feaa904d54bcaf1d8550240b0"
+  integrity sha512-ffDYRhqkSXwnd5EwcI1OpcOBQvQXLtPiuqAZMwcchz58kIBZGru3GWUQRBEL4ArEwuKlb0g7m9zCHy5hkoGjkw==
 
 sift@^5.1.0:
   version "5.1.0"

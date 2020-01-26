@@ -18,6 +18,15 @@ module.exports = {
       },
     },
     {
+      // This plugin lets me access environment variables that
+      // aren't prefixed with Gatsby. This allows me to use
+      // Shopify-related variables in the context setup script.
+      resolve: `gatsby-plugin-env-variables`,
+      options: {
+        whitelist: ["SHOP_NAME", "SHOP_TOKEN"],
+      },
+    },
+    {
       resolve: `gatsby-source-shopify`,
       options: {
         shopName: process.env.SHOP_NAME,

@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Styled, jsx } from "theme-ui"
 import Img from "gatsby-image"
 import { Grid, Select, Label, Button } from "@theme-ui/components"
-import { Layout, SEO } from "../components"
+import { Layout, SEO } from "../../components"
 import { useStaticQuery, graphql } from "gatsby"
 
 const ProductPage = () => {
@@ -15,8 +15,8 @@ const ProductPage = () => {
         nodes {
           id
           childImageSharp {
-            fluid(maxWidth: 600) {
-              ...GatsbyImageSharpFluid
+            fluid(maxWidth: 445) {
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }

@@ -12,7 +12,7 @@ const Tile = ({ title, slug, price, image }) => {
       placeholderImage: file(relativePath: { eq: "placeholder/shoe.png" }) {
         childImageSharp {
           fluid(maxWidth: 600) {
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
@@ -35,7 +35,7 @@ const Tile = ({ title, slug, price, image }) => {
       </div>
       <Styled.h2 sx={{ mt: 4, mb: 0, fontSize: 3 }}>{title}</Styled.h2>
       <Text sx={{ fontSize: 4, mb: 2 }}>${price.toFixed(2)}</Text>
-      <Link url={`/product/${slug}/`} isButton>
+      <Link url={`/product/${slug}`} isButton>
         View
       </Link>
     </Card>

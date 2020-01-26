@@ -29,6 +29,15 @@ export default {
       fontWeight: 600,
     },
   },
+  alerts: {
+    primary: {
+      border: "1px solid",
+      borderColor: "gray",
+      color: "black",
+      bg: "white",
+      fontWeight: "normal",
+    },
+  },
   cards: {
     primary: {
       padding: 2,

@@ -2,11 +2,12 @@
 import { useState, useEffect, useMemo } from "react"
 import { Styled, jsx } from "theme-ui"
 import Img from "gatsby-image"
-import { Grid, Button } from "@theme-ui/components"
+import { Grid, Button, Alert, Close } from "@theme-ui/components"
 import { Layout, SEO } from "../components"
 import { Thumbnail, OptionPicker } from "./components"
 import { graphql } from "gatsby"
 import { prepareVariantsWithOptions, prepareVariantsImages } from "./utilities"
+import { useAddItemToCart } from "../context/StoreContext"
 
 const ProductPage = ({ data: { shopifyProduct: product } }) => {
   const colors = product.options.find(
@@ -27,9 +28,11 @@ const ProductPage = ({ data: { shopifyProduct: product } }) => {
     throw new Error("Must have at least one product image!")
   }
 
+  const addItemToCart = useAddItemToCart()
   const [variant, setVariant] = useState(variants[0])
   const [color, setColor] = useState(variant.color)
   const [size, setSize] = useState(variant.size)
+  const [addedToCartMessage, setAddedToCartMessage] = useState(null)
 
   useEffect(() => {
     const newVariant = variants.find(variant => {
@@ -50,9 +53,29 @@ const ProductPage = ({ data: { shopifyProduct: product } }) => {
       </Grid>
     ) : null
 
+  function handleAddToCart() {
+    addItemToCart(variant.shopifyId, 1)
+    setAddedToCartMessage("🛒 Added to your cart!")
+  }
+
   return (
     <Layout>
       <SEO title={product.title} />
+      {addedToCartMessage ? (
+        <Alert sx={{ mb: 4 }} variant="primary">
+          {addedToCartMessage}
+          <Close
+            ml="auto"
+            mr={-2}
+            sx={{
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+            onClick={() => setAddedToCartMessage(null)}
+          />
+        </Alert>
+      ) : null}
       <Grid gap={4} columns={2}>
         <div>
           <div
@@ -87,7 +110,12 @@ const ProductPage = ({ data: { shopifyProduct: product } }) => {
               />
             </Grid>
           </div>
-          <Button sx={{ margin: 2, display: "block" }}>Add to Cart</Button>
+          <Button
+            sx={{ margin: 2, display: "block" }}
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </Button>
         </div>
       </Grid>
     </Layout>
