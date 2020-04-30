@@ -33,7 +33,7 @@ function setCheckoutInState(checkout, setStore) {
     localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, checkout.id)
   }
 
-  setStore(prevState => {
+  setStore((prevState) => {
     return { ...prevState, checkout }
   })
 }
@@ -51,7 +51,7 @@ const StoreContextProvider = ({ children }) => {
 
       if (existingCheckoutId) {
         try {
-          const checkout = await fetchCheckout(store, existingCheckoutId)
+          const checkout = await fetchCheckout(client, existingCheckoutId)
           // Make sure this cart hasn’t already been purchased.
           if (!checkout.completedAt) {
             setCheckoutInState(checkout, setStore)
@@ -62,12 +62,12 @@ const StoreContextProvider = ({ children }) => {
         }
       }
 
-      const newCheckout = await createNewCheckout(store)
+      const newCheckout = await createNewCheckout(client)
       setCheckoutInState(newCheckout, setStore)
     }
 
     initializeCheckout()
-  }, [store, setStore, store.client.checkout])
+  }, [])
 
   return (
     <StoreContext.Provider
@@ -137,7 +137,7 @@ function useAddItemToCart() {
       return
     }
 
-    setStore(prevState => {
+    setStore((prevState) => {
       return { ...prevState, isAdding: true }
     })
 
@@ -149,7 +149,7 @@ function useAddItemToCart() {
       lineItemsToAdd
     )
 
-    setStore(prevState => {
+    setStore((prevState) => {
       return { ...prevState, checkout: newCheckout, isAdding: false }
     })
   }
@@ -168,7 +168,7 @@ function useRemoveItemFromCart() {
       itemId,
     ])
 
-    setStore(prevState => {
+    setStore((prevState) => {
       return { ...prevState, checkout: newCheckout }
     })
   }
