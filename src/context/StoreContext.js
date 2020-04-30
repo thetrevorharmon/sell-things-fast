@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
 import Client from "shopify-buy"
-
 const SHOPIFY_CHECKOUT_STORAGE_KEY = "shopify_checkout_id"
 
 const client = Client.buildClient({
@@ -20,7 +19,7 @@ const StoreContext = React.createContext({
 })
 
 function createNewCheckout(store) {
-  return store.client.checkout.create()
+  return store.checkout.create()
 }
 
 function fetchCheckout(store, id) {
@@ -33,7 +32,7 @@ function setCheckoutInState(checkout, setStore) {
     localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, checkout.id)
   }
 
-  setStore((prevState) => {
+  setStore(prevState => {
     return { ...prevState, checkout }
   })
 }
@@ -137,7 +136,7 @@ function useAddItemToCart() {
       return
     }
 
-    setStore((prevState) => {
+    setStore(prevState => {
       return { ...prevState, isAdding: true }
     })
 
@@ -149,7 +148,7 @@ function useAddItemToCart() {
       lineItemsToAdd
     )
 
-    setStore((prevState) => {
+    setStore(prevState => {
       return { ...prevState, checkout: newCheckout, isAdding: false }
     })
   }
@@ -168,7 +167,7 @@ function useRemoveItemFromCart() {
       itemId,
     ])
 
-    setStore((prevState) => {
+    setStore(prevState => {
       return { ...prevState, checkout: newCheckout }
     })
   }
