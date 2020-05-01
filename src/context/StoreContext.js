@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
 import Client from "shopify-buy"
-
 const SHOPIFY_CHECKOUT_STORAGE_KEY = "shopify_checkout_id"
 
 const client = Client.buildClient({
@@ -20,7 +19,7 @@ const StoreContext = React.createContext({
 })
 
 function createNewCheckout(store) {
-  return store.client.checkout.create()
+  return store.checkout.create()
 }
 
 function fetchCheckout(store, id) {
@@ -51,7 +50,7 @@ const StoreContextProvider = ({ children }) => {
 
       if (existingCheckoutId) {
         try {
-          const checkout = await fetchCheckout(store, existingCheckoutId)
+          const checkout = await fetchCheckout(client, existingCheckoutId)
           // Make sure this cart hasn’t already been purchased.
           if (!checkout.completedAt) {
             setCheckoutInState(checkout, setStore)
@@ -62,12 +61,12 @@ const StoreContextProvider = ({ children }) => {
         }
       }
 
-      const newCheckout = await createNewCheckout(store)
+      const newCheckout = await createNewCheckout(client)
       setCheckoutInState(newCheckout, setStore)
     }
 
     initializeCheckout()
-  }, [store, setStore, store.client.checkout])
+  }, [])
 
   return (
     <StoreContext.Provider
